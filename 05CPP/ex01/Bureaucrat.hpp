@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 14:35:43 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/19 13:36:27 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/19 14:02:32 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 #include <iostream>
 
+class Form;
 class Bureaucrat
 {
 	private:
@@ -34,6 +35,7 @@ class Bureaucrat
 		/* Main Member Functions */
 		void 				incGrade(void);
 		void 				decGrade(void);
+		void				signForm(Form &form);
 		/* Exceptions */
 		class GradeTooHighException: public std::exception
 		{
