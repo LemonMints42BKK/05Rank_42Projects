@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 14:35:43 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/19 14:02:32 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/20 12:02:59 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ class Bureaucrat
 		{
 			public:
 				virtual char const	*what(void) const throw(){
-					return ("Grade is too high");
+					return ("Bureaucrat's grade is too high.");
 				}
 		};
 		class GradeTooLowException: public std::exception
 		{
 			public:
 				virtual char const	*what(void) const throw(){
-					return ("Grade is too low");
+					return ("Bureaucrat's grade is too low.");
 				}
 		};
 };

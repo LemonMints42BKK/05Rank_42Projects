@@ -6,11 +6,11 @@
 #    By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/07 13:07:47 by pnopjira          #+#    #+#              #
-#    Updated: 2023/12/19 13:37:47 by pnopjira         ###   ########.fr        #
+#    Updated: 2023/12/20 11:09:41 by pnopjira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= bureaucrat
+NAME		= ex01
 SRC			= main.cpp Bureaucrat.cpp Form.cpp
 OBJ			= $(SRC:.cpp=.o)
 CC			= c++

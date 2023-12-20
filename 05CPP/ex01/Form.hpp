@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 13:31:19 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/19 13:56:42 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/20 13:07:29 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,14 @@ class Form{
 		{
 			public:
 				virtual char const	*what(void) const throw(){
-					return ("Grade is too high");
+					return ("grade is too high.");
 				}
 		};
 		class GradeTooLowException: public std::exception
 		{
 			public:
 				virtual char const	*what(void) const throw(){
-					return ("Grade is too low");
+					return ("grade is too low.");
 				}
 		};
 };

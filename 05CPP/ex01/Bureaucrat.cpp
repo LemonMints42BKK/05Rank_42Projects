@@ -6,11 +6,12 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 14:35:37 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/19 13:20:05 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/20 13:37:06 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "Bureaucrat.hpp"
+#include "Bureaucrat.hpp"
+#include "Form.hpp"
 
 /* Constructors & Destructors */
 Bureaucrat::Bureaucrat(void) : _name("Default"), _grade(150) {
@@ -69,9 +70,23 @@ void 				Bureaucrat::decGrade(void){
 		throw Bureaucrat::GradeTooLowException();
 	else
 		this->putGrade(this->getGrade() + 1);
+	return ;
+}
+
+void				Bureaucrat::signForm(Form &form){
+	try
+	{
+		form.beSigned(*this);
+		std::cout << this->getName() << " signs " << form.getName() << std::endl;
+	}
+	catch (std::exception &e)
+	{
+		std::cout << this->getName() << " cannot sign " << form.getName() << " because " << e.what() << std::endl;
+	}
+	return ;
 }
 
 std::ostream	&operator<<(std::ostream &str, Bureaucrat const &bureaucrat)
 {
-	return (str << bureaucrat.getName() << ", bureaucrat grade " << bureaucrat.getGrade());
+	return (str << "Bureaucrat name's "<< bureaucrat.getName() << ", grade is " << bureaucrat.getGrade()<< ".");
 }
