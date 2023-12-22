@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 13:33:28 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/21 13:43:57 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/22 08:29:32 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(void)
 	RobotomyRequestForm robotomy("Morty");
 	PresidentialPardonForm pardon("Rick Sanchez");
 	Bureaucrat mike("Mike", 150);
-	Bureaucrat jon("Jon", 44);
+	Bureaucrat jon("Jon", 46);
 	Bureaucrat steve("Steve", 3);
 	
 	/* Try to execute forms without being signed */
@@ -32,14 +32,14 @@ int main(void)
 		{
 			std::cout << GREEN << steve << RESET <<std::endl;
 			
-			steve.executeAForm(shrubbery);
+			steve.executeForm(shrubbery);
 			std::cout << RED << shrubbery << RESET << std::endl;
 			
-			steve.executeAForm(robotomy);
+			steve.executeForm(robotomy);
 			std::cout << RED << robotomy << RESET << std::endl;
 			
 			pardon.beSigned(steve);
-			steve.executeAForm(pardon);
+			steve.executeForm(pardon);
 			std::cout << BLUE << pardon << RESET << std::endl;
 		}
 		catch (std::exception &e)
@@ -60,15 +60,15 @@ int main(void)
 			std::cout << GREEN << jon << RESET <<std::endl;
 			
 			jonShrubbery.beSigned(jon);
-			jon.executeAForm(jonShrubbery);
+			jon.executeForm(jonShrubbery);
 			std::cout << BLUE << jonShrubbery << RESET << std::endl;
 			
 			jonRobot.beSigned(jon);
-			jon.executeAForm(jonRobot);
+			jon.executeForm(jonRobot);
 			std::cout << BLUE << jonRobot << RESET << std::endl;			
 			
 			pardon.beSigned(jon);
-			jon.executeAForm(pardon);
+			jon.executeForm(pardon);
 			std::cout << BLUE << pardon << RESET << std::endl;
 		}
 		catch (std::exception &e)
@@ -84,15 +84,15 @@ int main(void)
 			std::cout << GREEN << mike << RESET <<std::endl;
 			
 			mikeShrubbery.beSigned(mike);
-			mike.executeAForm(mikeShrubbery);
+			mike.executeForm(mikeShrubbery);
 			std::cout << BLUE << mikeShrubbery << RESET << std::endl;
 			
 			robotomy.beSigned(mike);
-			mike.executeAForm(robotomy);
+			mike.executeForm(robotomy);
 			std::cout << BLUE << robotomy << RESET << std::endl;			
 			
 			pardon.beSigned(mike);
-			mike.executeAForm(pardon);
+			mike.executeForm(pardon);
 			std::cout << BLUE << pardon << RESET << std::endl;
 		}
 		catch (std::exception &e)
@@ -113,15 +113,15 @@ int main(void)
 			std::cout << GREEN << steve << RESET <<std::endl;
 			
 			steveShrubbery.beSigned(steve);
-			steve.executeAForm(steveShrubbery);
+			steve.executeForm(steveShrubbery);
 			std::cout << BLUE << steveShrubbery << RESET << std::endl;
 			
 			robotomy.beSigned(steve);
-			steve.executeAForm(robotomy);
+			steve.executeForm(robotomy);
 			std::cout << BLUE << robotomy << RESET << std::endl;
 			
 			pardon.beSigned(steve);
-			steve.executeAForm(pardon);
+			steve.executeForm(pardon);
 			std::cout << BLUE << pardon << RESET << std::endl;
 		}
 		catch (std::exception &e)
