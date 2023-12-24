@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 13:33:28 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/20 13:40:13 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/22 20:23:52 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int main(void)
 			Form form2("A50", 50, 100);
 			std::cout << form2 << std::endl;
 			Bureaucrat mike("Mike", 151);
-			std::cout << mike << std::endl;/* code */
+			std::cout << mike << std::endl;
 		}
 		catch(const std::exception& e)
 		{
@@ -46,7 +46,7 @@ int main(void)
 	{
 		try
 		{
-			Form form0("A0", 0, 50);
+			Form form0("A0", 5, 0);
 			std::cout << form0 << std::endl;
 			Bureaucrat meena("Meena", 49);
 			std::cout << meena << std::endl;
@@ -59,7 +59,7 @@ int main(void)
 
 		try
 		{
-			Form form1("A151", 151, 50);
+			Form form1("A151", 5, 151);
 			std::cout << form1 << std::endl;
 			Bureaucrat meena("Meena", 49);
 			std::cout << meena << std::endl;

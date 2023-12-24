@@ -79,7 +79,6 @@ void			AForm::execute(Bureaucrat const &executor) const{
 
 }
 
-
 std::ostream	&operator<<(std::ostream &str, AForm const &form){
 	str << "Form " << form.getName() << " could signed";
 	str << " with require grade " << form.getSignGrade() << " to sign and grade " << form.getExecGrade() << " to execute";

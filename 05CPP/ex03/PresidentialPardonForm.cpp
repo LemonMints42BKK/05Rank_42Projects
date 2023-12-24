@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:05:58 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/22 08:20:18 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/22 21:44:48 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ std::string const &	PresidentialPardonForm::getTarget(void) const{
 /* Main Member Functions */
 void				PresidentialPardonForm::beExecuted(Bureaucrat const & executor) const {
 	(void)executor;
-	std::cout << this->getTarget() << " has been pardoned by Zafod Beeblebrox." << std::endl;
+	std::cout << this->getTarget() << " has been pardoned by Zaphod Beeblebrox." << std::endl;
 	return ;
 }
 

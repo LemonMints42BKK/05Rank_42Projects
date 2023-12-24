@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/20 14:05:51 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/22 08:31:04 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/22 20:54:54 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void				RobotomyRequestForm::beExecuted(Bureaucrat const &executor) const{
 	if (success)
 		std::cout << this->_target << " has been robotomized successfully 50\% of the time. " << std::endl;
 	else
-		std::cout << this->_target << "'s robotomization failed" << std::endl;
+		std::cout << "the robotomy failed" << std::endl;
 	return ;
 }
 

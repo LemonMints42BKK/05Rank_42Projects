@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/19 13:33:28 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/22 12:29:00 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/22 22:33:04 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,43 +17,7 @@
 #include "RobotomyRequestForm.hpp"
 #include "PresidentialPardonForm.hpp"
 
-// int main(void)
-// {
-
-// 	return (0);
-// }
-std::string	megaphone(std::string str);
-
-int main(int argc, char **argv)
-{
-    if (argc == 3){
-        Intern intern;
-        std::string lv = megaphone(argv[1]);
-		std::string target = argv[2];
-        if (lv == "PRESIDENTIALPARDON" || lv == "ROBOTOMYREQUEST" || lv == "SHRUBBERYCREATION"){
-			Bureaucrat steve("Steve", 3);
-			AForm * form = intern.makeForm(lv, target);
-			try
-			{
-				std::cout << GREEN << steve << RESET <<std::endl;
-				form->beSigned(steve);
-				steve.executeForm(*form);
-				std::cout << BLUE << *form << RESET << std::endl;
-				delete form;
-			}
-			catch (std::exception &e)
-			{	
-				std::cout << e.what() << std::endl;
-			}
-        } else  {
-            std::cout << YELLOW <<"[ Error! Form name is incorrect.]" << RESET << std::endl;
-        }
-    } else {
-        std::cout << "Usage: ./ex03 [formName] [target]" << std::endl;
-    }
-    return 0;
-}
-std::string	megaphone(std::string str){
+std::string	mega(std::string str){
 	int i = 0;
 	while (str[i])
 	{
@@ -62,3 +26,32 @@ std::string	megaphone(std::string str){
 	}
 	return (str);
 }
+
+int main(void)
+{
+    Intern  someRandomIntern;
+	AForm * form[4] = {someRandomIntern.makeForm(mega("ShrubberyCreation"), "Goodday"), someRandomIntern.makeForm(mega("RobotomyRequest"), "Bob") \
+	, someRandomIntern.makeForm(mega("PresidentialPardon"), "Badboy"), someRandomIntern.makeForm(mega("helloWorld"), "Home")};
+	
+	try
+	{
+		int i = 0;
+		Bureaucrat steve("Steve", 3);
+		std::cout << GREEN << steve << RESET <<std::endl;
+		while(form[i])
+		{
+			std::cout << BLUE << *form[i] << RESET << std::endl;
+			form[i]->beSigned(steve);
+			steve.executeForm(*form[i]);
+			delete form[i];
+			i++;
+		}
+	}
+	catch (std::exception &e)
+	{	
+		std::cout << e.what() << std::endl;
+	}
+    return 0;
+}
+
+

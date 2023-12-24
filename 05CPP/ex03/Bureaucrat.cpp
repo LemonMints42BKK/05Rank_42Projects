@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 14:35:37 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/22 09:24:51 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/22 21:41:19 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void 				Bureaucrat::decGrade(void){
 	return ;
 }
 
-void				Bureaucrat::signForm(AForm &form){
+void				Bureaucrat::signForm(AForm & form){
 	try
 	{
 		form.beSigned(*this);
@@ -86,17 +86,11 @@ void				Bureaucrat::signForm(AForm &form){
 	return ;
 }
 
-void				Bureaucrat::executeForm(AForm const &form) const{
+void				Bureaucrat::executeForm(AForm const &form){
 	try
 	{
-		if ( !form.getIsSigned())
-			throw AForm::NotSignedException();
-		else if (this->getGrade() > form.getExecGrade())
-			throw Bureaucrat::GradeTooLowException();
-		else{
-			std::cout << this->getName() << " executes " << form.getName() << std::endl;
-			form.execute(*this);
-		}
+		form.execute(*this);
+		std::cout << this->getName() << " executes " << form.getName() << std::endl;
 	}
 	catch (std::exception &e)
 	{

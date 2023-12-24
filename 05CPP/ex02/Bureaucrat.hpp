@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 14:35:43 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/22 08:32:38 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/22 21:33:09 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ class Bureaucrat
 		void 				incGrade(void);
 		void 				decGrade(void);
 		void				signForm(AForm &form);
-		void				executeForm(AForm const &form) const;
+		void				executeForm(AForm const &form);
 		/* Exceptions */
 		class GradeTooHighException: public std::exception
 		{
