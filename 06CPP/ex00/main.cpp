@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/23 15:44:44 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/24 08:43:23 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/25 01:37:43 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,17 @@ bool	isPseudoLiterals(const std::string & input){
 }
 
 int main(int argc, char** argv){
-	if (argc == 2){
-		std::string input = argv[1];
+	if (argc != 2){
+		std::cout << "invalid arguments" << std::endl; 
+		return (1);
+	} else {
+		std::string	input = argv[1];	
 		if (isDecimalNotation(input) || isChar(input) || isPseudoLiterals(input))
 			ScalarConverter::convert(input);
-		else
-			return (perror("non displayable characters shouldn’t be used, only the decimal notation."), EXIT_FAILURE);
+		else{
+			std::cerr << "non displayable characters shouldn’t be used, only the decimal notation." << std::endl;
+			return (EXIT_FAILURE);
+		}		
 	}
-	else
-		std::cout << ">>> invalid argument <<<" << std::endl;
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/22 23:34:52 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/24 11:49:19 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/25 07:58:45 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,76 +32,65 @@ ScalarConverter::~ScalarConverter(void){
 }
 /* Main Member Functions */
 
-double	pseudoLiterals(const std::string &	literal){
-	if (literal == "nan")
-		return (std::sqrt(-1.0));
-	if (literal == "+inf"  || literal == "inf")
-		return (std::numeric_limits<float>::infinity());
-	if (literal == "+inff" || literal == "inff")
-		return (std::numeric_limits<double>::infinity());
-	if (literal == "-inf" )
-		return (-std::numeric_limits<float>::infinity());
-	if (literal == "-inff")
-		return (-std::numeric_limits<double>::infinity());
-	return (0);
-}
-
-double	typeChar(const std::string &	literal){
+bool	typeChar(const std::string &	literal, double &num, bool &isChar){
 	if (literal.length() == 1 && (literal.at(0) >= 32 && literal.at(0) <= 126)){
 		if (literal.at(0) >= 48 && literal.at(0) <= 57)
 			return (false);
-		else
-			return (literal.at(0));
+		else{
+			num = static_cast<double>(literal.at(0));
+			isChar = true;
+			return (true);
+		}
 	}
-	return (0);
+	return (false);
 }
 
-double	decimalNotation(const std::string &	literal){
-	std::istringstream iss(literal);
-	double numDouble = 0.0;
-			
-	if (iss >> numDouble){
-		char sign = '\0';
-		if (iss.get(sign) && (sign == '+' || sign == '-')){
-			if (sign == '-')
-				numDouble *= -1;
+bool read_double(std::string str, double *num)
+{
+    std::stringstream ss;
+
+    ss << str;
+    ss >> *num;
+    return (!ss.fail());
+}
+
+bool	read_double_complete(std::string str, double &num, bool &isChar, bool &isDecimalNotation){
+	if (typeChar(str, num, isChar))
+		return (true);
+	while (str.length() > 0)
+    {
+        if (read_double(str, &num)){
+			// if (num == INFINITY || num == -INFINITY || num == std::sqrt(-1.0))
+			// 	isDecimalNotation = true;
+            return (true);
 		}
-		char suffix = '\0';
-		if (iss >> suffix && (std::tolower(suffix) == 'f')){
-			numDouble = static_cast<float>(numDouble);	
-		} else {
-			iss.putback(suffix);
-		}	
-	} else {
-		std::cerr << "Conversion failed for string: " << literal << std::endl;
-	}
-	return (numDouble);
+        str.erase(str.length() - 1, 1);
+		if (str.at(str.length() - 1) == '.')
+			isDecimalNotation = true;
+    }
+	return (false);
 }
 
 void ScalarConverter::convert(std::string literal){
 	double lit = 0.0;
 	bool isChar = false;
-	bool isDecimalPoint = false;
-	
-	if (pseudoLiterals(literal)){
-		lit = pseudoLiterals(literal);
-	} else if (typeChar(literal)){
-		isChar = true;
-		lit = typeChar(literal);
-	} else if (decimalNotation(literal)){
-		isDecimalPoint = true;
-		lit = decimalNotation(literal);
-	} else {
-		std::istringstream str(literal);
-		str >> lit;
+	bool isDecimalNotation = false;
+	char16_t	a = '\0';
+	int			b = 0;
+	float		c = 0;
+	double		d = 0;
+
+	if (read_double_complete(literal, lit, isChar, isDecimalNotation)){
+		ScalarConverter var;
+		var.putVar(lit);
+		a =	'\0';
+		b =	var;
+		c =	var;
+		d =	var;
 	}
-	ScalarConverter var;
-	var.putVar(lit);
-	char16_t	a	=	'\0';
-	int			b	=	var;
-	float		c	=	var;
-	double		d	=	var;
-	
+    else
+        throw ScalarConverter::CanNotConvertException();
+		
 	if (b >= 32 && b <= 126)
 		a = static_cast<char16_t>(b);
 	
@@ -120,14 +109,11 @@ void ScalarConverter::convert(std::string literal){
 	else
 		std::cout << "int: " << b << std::endl;
 		
-	if ((d != 0 ) && isDecimalPoint){	
+	if (isDecimalNotation || c == INFINITY || c == -INFINITY || c != c) {	 // from IEEE stand NaN values 
 		std::cout << "float: " << c << "f" << std::endl;
 		std::cout << "double: " << d << std::endl;
-	}
-	else if ((d == 0) || !isDecimalPoint){
+	} else {
 		std::cout << "float: " << c << ".0f" << std::endl;
 		std::cout << "double: " << d << ".0" << std::endl;
 	}
-
 }
-/* Exceptions */
