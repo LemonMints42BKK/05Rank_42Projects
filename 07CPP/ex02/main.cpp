@@ -10,7 +10,7 @@ int main(int, char**)
     srand(time(NULL));
     for (int i = 0; i < MAX_VAL; i++)
     {
-        const int value = rand();
+        const int value = rand() % 100;
         numbers[i] = value;
         mirror[i] = value;
     }
@@ -19,12 +19,12 @@ int main(int, char**)
         Array<int> tmp = numbers;
         Array<int> test(tmp);
     }
-
+	//mirror[0] = 0;
     for (int i = 0; i < MAX_VAL; i++)
     {
         if (mirror[i] != numbers[i])
         {
-            std::cerr << "didn't save the same value!!" << std::endl;
+            std::cerr << "index "<< i<<" didn't save the same value!!" << std::endl;
             return 1;
         }
     }
