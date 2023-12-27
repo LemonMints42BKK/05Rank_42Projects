@@ -6,23 +6,26 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/25 20:33:37 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/25 20:35:11 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/26 22:51:21 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Array.hpp"
-#include <iostream>
-#include <iomanip>
+#pragma once
 
-template <typename T>
-class Array
+template <typename U>
+Array<U> numbers(U const &n)
 {
-	private:
-		T *arr;
-		unsigned int len;
-	public:
-		Array();
-		Array(unsigned int n);
-		Array(const Array &src);
-		~Array();
-};
+	Array<U> arr(n);
+	return (arr);
+}
+
+template <typename U>
+Array<U> time(Array<U> &arr)
+{
+	clock_t start, end;
+	start = clock();
+	for (unsigned int i = 0; i < arr.size(); i++)
+		arr[i] = rand();
+	end = clock();
+	std::cout << "Time taken to assign " << arr.size() << " elements: " << (double)(end - start) / CLOCKS_PER_SEC << "s" << std::endl;
+}
