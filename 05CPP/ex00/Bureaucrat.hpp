@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/07 14:35:43 by pnopjira          #+#    #+#             */
-/*   Updated: 2023/12/19 13:36:27 by pnopjira         ###   ########.fr       */
+/*   Updated: 2023/12/27 21:57:22 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ class Bureaucrat
 	public:
 		/* Constructors & Destructors */
 		Bureaucrat(void);
-		Bureaucrat(std::string const & name, int grade);
+		Bureaucrat(std::string const & name, int const & grade);
 		Bureaucrat(Bureaucrat const & src);
 		~Bureaucrat(void);
 		/* Basic Operators */
