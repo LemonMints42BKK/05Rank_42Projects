@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/26 23:24:10 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/03 21:45:56 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/03 21:48:03 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,13 @@ int main() {
 	}
 	std::cout << std::endl;
 	/*addNumber*/
-	Span sp = Span(6);
+	Span sp = Span(5);
 	
-	sp.addNumber(5);
-	sp.addNumber(8);
+	sp.addNumber(6);
 	sp.addNumber(3);
 	sp.addNumber(17);
 	sp.addNumber(9);
-	sp.addNumber(42);
+	sp.addNumber(11);
 	std::cout << sp << std::endl;
 
 	std::cout << "Shortest span: " << sp.shortestSpan() << std::endl;
