@@ -6,20 +6,21 @@
 #    By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/07 13:07:47 by pnopjira          #+#    #+#              #
-#    Updated: 2023/12/25 14:23:44 by pnopjira         ###   ########.fr        #
+#    Updated: 2024/01/04 11:26:24 by pnopjira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= templates
-SRC			= main.cpp
+NAME		= RPN
+SRC			= main.cpp RPN.cpp
 OBJ			= $(SRC:.cpp=.o)
+HED			= RPN.hpp
 CC			= c++
 RM 			= rm -rf
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(HED)
 	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
 clean:

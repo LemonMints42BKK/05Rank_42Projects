@@ -6,22 +6,21 @@
 #    By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/07 13:07:47 by pnopjira          #+#    #+#              #
-#    Updated: 2024/01/03 15:01:06 by pnopjira         ###   ########.fr        #
+#    Updated: 2024/01/04 11:27:16 by pnopjira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= easyfind
-SRC			= main.cpp
+NAME		= PmergeMe
+SRC			= main.cpp PmergeMe.cpp
 OBJ			= $(SRC:.cpp=.o)
-HED			= easyfind.hpp
-TPP			= easyfind.tpp
+HED			= PmergeMe.hpp
 CC			= c++
 RM 			= rm -rf
 CPPFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(HED) $(TPP)
+$(NAME): $(OBJ) $(HED)
 	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
 
 clean:
