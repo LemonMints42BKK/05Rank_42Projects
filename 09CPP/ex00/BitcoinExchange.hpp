@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:24:29 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/07 20:43:25 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/07 23:09:09 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ class BitcoinExchange {
 	private:
 		std::string						_database;
 		std::string						_datafile;
-		std::map<std::string, float>	*_db;
-		std::map<std::string, float>	*_df;
+		std::multimap<std::string, float>	_db;
+		std::multimap<std::string, float>	_df;
 		
-		void _dataToMap(std::string data, char 	ch, std::map<std::string, float> *map);
+		void _dataToMap(std::string data, char 	ch, std::multimap<std::string, float> *map);
 	public:
 		BitcoinExchange();
 		BitcoinExchange(std::string data);
@@ -39,8 +39,8 @@ class BitcoinExchange {
 		void							putDatafile(std::string argv);		
 		std::string						getDatabase() const;
 		std::string						getDatafile() const;
-		std::map<std::string, float>	*getDB() const;
-		std::map<std::string, float>	*getDF() const;
+		std::multimap<std::string, float>	*getDB() const;
+		std::multimap<std::string, float>	*getDF() const;
 		
 		void	execExchange(std::string argv);
 		class FileNotFound : public std::exception {

@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:29:10 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/07 20:45:49 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/07 23:15:05 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,18 @@
 /************************************************
  *         Constructor&Deconstructor            *
  ************************************************/
-BitcoinExchange::BitcoinExchange(void): _database("data.csv"), _datafile("") , _db(NULL), _df(NULL){
+BitcoinExchange::BitcoinExchange(void): _database("data.csv"), _datafile(""){
 	if (isValidFile(this->_database)){
-		this->_db = new std::map<std::string, float>;
-		_dataToMap(this->_database, ',', this->_db);
+		_dataToMap(this->_database, ',', &(this->_db));
 	} else
 		throw FileNotFound();
-	std::cout << "constructor" << std::endl;
 }
 
-BitcoinExchange::BitcoinExchange(std::string database): _database(database), _datafile(""), _db(NULL), _df(NULL){	
+BitcoinExchange::BitcoinExchange(std::string database): _database(database), _datafile(""){	
 	if (isValidFile(this->_database)){
-		this->_db = new std::map<std::string, float>;
-		_dataToMap(this->_database, ',', this->_db);
+		_dataToMap(this->_database, ',', &(this->_db));
 	} else
 		throw FileNotFound();
-	std::cout << "constructor" << std::endl;
 }
 
 BitcoinExchange::~BitcoinExchange() {
@@ -38,7 +34,6 @@ BitcoinExchange::~BitcoinExchange() {
 		this->getDB()->clear();
 	if (this->getDF())
 		this->getDF()->clear();
-	std::cout << "deconstructor" << std::endl;
 }
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other) {
@@ -77,12 +72,12 @@ std::string BitcoinExchange::getDatafile() const {
 	return (this->_datafile);
 } 
 
-std::map<std::string, float> *BitcoinExchange::getDB() const {
-	return (this->_db);
+std::multimap<std::string, float> *BitcoinExchange::getDB() const {
+	return const_cast<std::multimap<std::string, float> *>(&this->_db);
 }
 
-std::map<std::string, float> *BitcoinExchange::getDF() const {
-	return (this->_df);
+std::multimap<std::string, float> *BitcoinExchange::getDF() const {
+	return const_cast<std::multimap<std::string, float> *>(&this->_df);
 }
 /************************************************
  *               Member function                *
@@ -93,13 +88,12 @@ void	BitcoinExchange::execExchange(std::string argv){
 		this->putDatafile(argv);
 		if (this->getDF())
 			this->getDF()->clear();
-		this->_df = new std::map<std::string, float>;
-		_dataToMap(this->getDatafile(), '|', this->_df);
+		_dataToMap(this->getDatafile(), '|', &(this->_df));
 	} else
 		throw FileNotFound();
 }
 
-void BitcoinExchange::_dataToMap(std::string data, char ch, std::map<std::string, float> *map) {
+void BitcoinExchange::_dataToMap(std::string data, char ch, std::multimap<std::string, float> *map) {
 	std::ifstream file(data);
 	std::string line;
 	std::string date;
@@ -112,10 +106,8 @@ void BitcoinExchange::_dataToMap(std::string data, char ch, std::map<std::string
 		if (isValidDate(date)){
 			std::string tmp = trim(line.substr(line.find(ch) + 1, line.length()));
 			value = atof(tmp.c_str());
-			std::cout << "Original string: " << tmp << std::endl;
-    		std::cout << std::fixed << std::setprecision(2)<< "Converted value: " << value << std::endl;
 			// if (isValidValue(value))
-			map->insert(std::pair<std::string, float>(date,  std::fixed << std::setprecision(2)<< value));
+			*map->insert(std::make_pair(date, value));
 		}
 	}
 	file.close();
