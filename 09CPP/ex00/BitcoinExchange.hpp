@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:24:29 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/05 13:51:19 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/07 20:43:25 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,17 @@
 #include <exception>
 #include <cstdlib>
 #include <string>
+#include <iomanip>
 #include <map>
 
 class BitcoinExchange {
 	private:
 		std::string						_database;
 		std::string						_datafile;
-		std::map<std::string, double>	*_db;
-		std::map<std::string, double>	*_df;
+		std::map<std::string, float>	*_db;
+		std::map<std::string, float>	*_df;
 		
-		void _dataToMap(std::string data, char 	ch, std::map<std::string, double> *map);
+		void _dataToMap(std::string data, char 	ch, std::map<std::string, float> *map);
 	public:
 		BitcoinExchange();
 		BitcoinExchange(std::string data);
@@ -38,8 +39,8 @@ class BitcoinExchange {
 		void							putDatafile(std::string argv);		
 		std::string						getDatabase() const;
 		std::string						getDatafile() const;
-		std::map<std::string, double>	*getDB() const;
-		std::map<std::string, double>	*getDF() const;
+		std::map<std::string, float>	*getDB() const;
+		std::map<std::string, float>	*getDF() const;
 		
 		void	execExchange(std::string argv);
 		class FileNotFound : public std::exception {
@@ -52,4 +53,5 @@ class BitcoinExchange {
 
 bool isValidFile(std::string file);
 bool isValidDate(std::string date);
-bool isValidValue(double value);
+bool isValidValue(float value);
+std::string trim(const std::string& s);

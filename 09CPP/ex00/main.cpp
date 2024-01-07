@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:24:05 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/05 13:50:47 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/07 20:37:10 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int main(int argc, char **argv)
 			BitcoinExchange btc;
 			btc.execExchange(argv[1]);
 			
-		std::map<std::string, double> db = *(btc.getDB());
-		for (std::map<std::string, double>::iterator it = db.begin(); it != db.end(); ++it) {
-			std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
-		}
+		// std::map<std::string, double> db = *(btc.getDB());
+		// for (std::map<std::string, double>::iterator it = db.begin(); it != db.end(); ++it) {
+		// 	std::cout << "Key: " << it->first << ", Value: " << it->second << std::endl;
+		// }
 			
 		// } catch (std::exception &e)
 		// 	std::cout << e.what() << std::endl;

@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/03 13:55:16 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/03 21:42:37 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/07 22:16:59 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 class Span {
 	private:
 		unsigned int _n;
-		std::vector<int> *_vec;
+		std::vector<int> _vec;
 		
 		Span();
 	public:	
@@ -30,7 +30,7 @@ class Span {
 		Span &operator=(Span const &copy);
 		
 		unsigned int getN() const;
-		std::vector<int> & getVec() const;
+		std::vector<int> *getVec() const;
 		
 		void addNumber(int n);
 		void addNumber(std::vector<int>::iterator begin, std::vector<int>::iterator end);

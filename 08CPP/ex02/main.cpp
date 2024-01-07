@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 08:16:04 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/04 11:01:28 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/07 22:29:56 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int main(){
 	}
 	
 	// std::stack<int> s(mstack);
-	/*std::stack does expose its iterators to subclasses through its protected interface */
+	// /*std::stack does expose its iterators to subclasses through its protected interface */
 	// std::stack<int>::iterator sit = s.begin(); std::stack<int>::iterator site = s.end();
 	// while (sit != site) {
 	// 	std::cout << *sit << std::endl;
@@ -51,40 +51,33 @@ int main(){
 	
 	std::cout << "---------------------" << std::endl;
 	
-	// std::cout << ">>>>>List<<<<<" << std::endl;
+	std::cout << ">>>>>List<<<<<" << std::endl;
 	
-	// std::list<int> mstack;
+	std::list<int> mlist;
 	
-	// mstack.push_back(5);
-	// mstack.push_back(17);
+	mlist.push_back(5);
+	mlist.push_back(17);
 	
-	// std::cout << "print back: " << mstack.back() << std::endl;
+	std::cout << "print back: " << mlist.back() << std::endl;
 	
-	// mstack.pop_back();
+	mlist.pop_back();
 	
-	// std::cout << "print size: " << mstack.size() << std::endl;
+	std::cout << "print size: " << mlist.size() << std::endl;
 	
-	// mstack.push_back(3);
-	// mstack.push_back(5);
-	// mstack.push_back(737);
-	// mstack.push_back(0);
+	mlist.push_back(3);
+	mlist.push_back(5);
+	mlist.push_back(737);
+	mlist.push_back(0);
 	
-	// std::list<int>::iterator it = mstack.begin();
-	// std::list<int>::iterator ite = mstack.end();
+	std::list<int>::iterator itl = mlist.begin();
+	std::list<int>::iterator itle = mlist.end();
 	
-	// ++it;
-	// --it;
-	// while (it != ite) {
-	// 	std::cout << *it << std::endl;
-	// 	++it; 
-	// }
+	++itl;
+	--itl;
+	while (itl != itle) {
+		std::cout << *itl << std::endl;
+		++itl; 
+	}
 	
-	// std::cout << std::endl;
-	// std::list<int> s(mstack);
-	// std::list<int>::iterator sit = s.begin(); std::list<int>::iterator site = s.end();
-	// while (sit != site) {
-	// 	std::cout << *sit << std::endl;
-	// 	++sit; 
-	// }
 	return 0;
 }
