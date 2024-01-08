@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:24:29 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/07 23:09:09 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/08 13:56:21 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,5 @@ class BitcoinExchange {
 
 bool isValidFile(std::string file);
 bool isValidDate(std::string date);
-bool isValidValue(float value);
+bool isValidValue(float *value, char ch);
 std::string trim(const std::string& s);

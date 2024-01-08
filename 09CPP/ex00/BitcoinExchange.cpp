@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:29:10 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/07 23:15:05 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:00:37 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,22 @@ void	BitcoinExchange::execExchange(std::string argv){
 		_dataToMap(this->getDatafile(), '|', &(this->_df));
 	} else
 		throw FileNotFound();
+	std::multimap<std::string, float> *df =  this->getDF();
+	std::multimap<std::string, float> *db =  this->getDB();
+	for (std::multimap<std::string, float>::iterator it = df->begin(); it != df->end(); ++it){
+		if (it->second == -1)
+			std::cout << "Error: not a positive number." << std::endl;
+		else if (it->second == -2)
+			std::cout << "Error: too large a number." << std::endl;
+		else {
+			std::cout << it->first <<" => "<< it->second;
+			for (std::multimap<std::string, float>::iterator its = db->begin(); its != db->end(); ++its){
+				if (it->first == its->first)
+					std::cout << " = "<< its->second;
+			}
+			std::cout << std::endl;
+		}
+	}
 }
 
 void BitcoinExchange::_dataToMap(std::string data, char ch, std::multimap<std::string, float> *map) {
@@ -106,8 +122,8 @@ void BitcoinExchange::_dataToMap(std::string data, char ch, std::multimap<std::s
 		if (isValidDate(date)){
 			std::string tmp = trim(line.substr(line.find(ch) + 1, line.length()));
 			value = atof(tmp.c_str());
-			// if (isValidValue(value))
-			*map->insert(std::make_pair(date, value));
+			if (isValidValue(&value, ch))
+				*map->insert(std::make_pair(date, value));
 		}
 	}
 	file.close();
@@ -124,18 +140,43 @@ bool isValidFile(std::string file){
 	return (true);
 }
 
+bool isLeapYear(int year) {
+    // Leap year if divisible by 4
+    // Exception: If divisible by 100, must also be divisible by 400
+    return (year % 4 == 0) && ((year % 100 != 0) || (year % 400 == 0));
+}
+
+bool has30Days(int month) {
+    // Check if the month has 30 days
+    return (month == 4 || month == 6 || month == 9 || month == 11);
+}
+
 bool isValidDate(std::string date){
-	if (date == "date")
+	if (date == "date" || (date.length() != 10 && date.at(4) != '-' && date.at(7) != '-'))
 		return (false);
-	if (date.length() == 10 && date.at(4) == '-' && date.at(7) == '-'){
-		
-	}
+	int	y = atoi(date.substr(0, 4).c_str());
+	int	m = atoi(date.substr(5, 2).c_str());
+	int	d = atoi(date.substr(8, 2).c_str());
+	if (y < 2000  || y > 2022 || m < 0 || m > 12 || d < 0 || d > 31)
+		return (false);
+	if (m == 2 && (!isLeapYear(y) && d >= 29))
+		return (false);
+	if (has30Days(m) && d > 30)
+		return (false);
 	return (true);
 }
 
-bool isValidValue(float value){
-	if (value < 0 || value > 1000)
-		return (false);
+bool isValidValue(float * value, char ch){
+	if ( ch == ','){
+		if (*value < 0)
+			return (false);
+		return (true);
+	} else {
+		if (*value < 0)
+			*value = -1;
+		else if (*value > 1000)
+			*value = -2;
+	}
 	return (true);
 }
 
