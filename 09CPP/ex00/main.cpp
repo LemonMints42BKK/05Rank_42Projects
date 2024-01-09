@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:24:05 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/08 13:34:05 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/09 21:23:11 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,11 @@ int main(int argc, char **argv)
 			std::cout << " <<<<<<<< BitcoinExchange >>>>>>>> " << std::endl;
 			BitcoinExchange btc;
 			btc.execExchange(argv[1]);
+			std::cout << " <<<<<<<< >>>>>>>> " << std::endl;
+			std::unordered_multimap<std::string, float> *df = btc.getDF();
+			for (std::unordered_multimap<std::string, float>::iterator it = df->begin(); it != df->end(); it++)
+				std::cout << it->first << " " << it->second << std::endl;
+				
 		} catch (std::exception &e){
 			std::cout << e.what() << std::endl;
 		}

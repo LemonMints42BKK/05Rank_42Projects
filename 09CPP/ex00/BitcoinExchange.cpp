@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:29:10 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/08 14:00:37 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/09 21:21:33 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,12 +72,12 @@ std::string BitcoinExchange::getDatafile() const {
 	return (this->_datafile);
 } 
 
-std::multimap<std::string, float> *BitcoinExchange::getDB() const {
-	return const_cast<std::multimap<std::string, float> *>(&this->_db);
+std::unordered_multimap<std::string, float> *BitcoinExchange::getDB() const {
+	return const_cast<std::unordered_multimap<std::string, float> *>(&this->_db);
 }
 
-std::multimap<std::string, float> *BitcoinExchange::getDF() const {
-	return const_cast<std::multimap<std::string, float> *>(&this->_df);
+std::unordered_multimap<std::string, float> *BitcoinExchange::getDF() const {
+	return const_cast<std::unordered_multimap<std::string, float> *>(&this->_df);
 }
 /************************************************
  *               Member function                *
@@ -91,16 +91,18 @@ void	BitcoinExchange::execExchange(std::string argv){
 		_dataToMap(this->getDatafile(), '|', &(this->_df));
 	} else
 		throw FileNotFound();
-	std::multimap<std::string, float> *df =  this->getDF();
-	std::multimap<std::string, float> *db =  this->getDB();
-	for (std::multimap<std::string, float>::iterator it = df->begin(); it != df->end(); ++it){
+	std::unordered_multimap<std::string, float> *df =  this->getDF();
+	std::unordered_multimap<std::string, float> *db =  this->getDB();
+	for (std::unordered_multimap<std::string, float>::iterator it = df->begin(); it != df->end(); ++it){
 		if (it->second == -1)
 			std::cout << "Error: not a positive number." << std::endl;
 		else if (it->second == -2)
 			std::cout << "Error: too large a number." << std::endl;
+		else if (it->second == -3)
+			std::cout << "Error: bad input => " << it->first << std::endl;
 		else {
 			std::cout << it->first <<" => "<< it->second;
-			for (std::multimap<std::string, float>::iterator its = db->begin(); its != db->end(); ++its){
+			for (std::unordered_multimap<std::string, float>::iterator its = db->begin(); its != db->end(); ++its){
 				if (it->first == its->first)
 					std::cout << " = "<< its->second;
 			}
@@ -109,7 +111,7 @@ void	BitcoinExchange::execExchange(std::string argv){
 	}
 }
 
-void BitcoinExchange::_dataToMap(std::string data, char ch, std::multimap<std::string, float> *map) {
+void BitcoinExchange::_dataToMap(std::string data, char ch, std::unordered_multimap<std::string, float> *map) {
 	std::ifstream file(data);
 	std::string line;
 	std::string date;
@@ -119,11 +121,16 @@ void BitcoinExchange::_dataToMap(std::string data, char ch, std::multimap<std::s
 		throw BitcoinExchange::FileNotFound();
 	while (std::getline(file, line)) {
 		date = trim(line.substr(0, line.find(ch)));
-		if (isValidDate(date)){
+		if (date == "date")
+			continue;
+		if (isValidDate(date) && line.find(ch) != std::string::npos){
 			std::string tmp = trim(line.substr(line.find(ch) + 1, line.length()));
 			value = atof(tmp.c_str());
 			if (isValidValue(&value, ch))
 				*map->insert(std::make_pair(date, value));
+		} else {
+			value = -3;
+			*map->insert(std::make_pair(date, value));
 		}
 	}
 	file.close();
@@ -152,7 +159,7 @@ bool has30Days(int month) {
 }
 
 bool isValidDate(std::string date){
-	if (date == "date" || (date.length() != 10 && date.at(4) != '-' && date.at(7) != '-'))
+	if (date.length() != 10 && date.at(4) != '-' && date.at(7) != '-')
 		return (false);
 	int	y = atoi(date.substr(0, 4).c_str());
 	int	m = atoi(date.substr(5, 2).c_str());
@@ -175,7 +182,7 @@ bool isValidValue(float * value, char ch){
 		if (*value < 0)
 			*value = -1;
 		else if (*value > 1000)
-			*value = -2;
+			*value = -2;	
 	}
 	return (true);
 }

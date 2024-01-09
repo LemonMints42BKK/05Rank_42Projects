@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:24:29 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/08 13:56:21 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/08 22:48:19 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@
 #include <cstdlib>
 #include <string>
 #include <iomanip>
-#include <map>
+#include <unordered_map>
 
 class BitcoinExchange {
 	private:
 		std::string						_database;
 		std::string						_datafile;
-		std::multimap<std::string, float>	_db;
-		std::multimap<std::string, float>	_df;
+		std::unordered_multimap<std::string, float>	_db;
+		std::unordered_multimap<std::string, float>	_df;
 		
-		void _dataToMap(std::string data, char 	ch, std::multimap<std::string, float> *map);
+		void _dataToMap(std::string data, char 	ch, std::unordered_multimap<std::string, float> *map);
 	public:
 		BitcoinExchange();
 		BitcoinExchange(std::string data);
@@ -39,8 +39,8 @@ class BitcoinExchange {
 		void							putDatafile(std::string argv);		
 		std::string						getDatabase() const;
 		std::string						getDatafile() const;
-		std::multimap<std::string, float>	*getDB() const;
-		std::multimap<std::string, float>	*getDF() const;
+		std::unordered_multimap<std::string, float>	*getDB() const;
+		std::unordered_multimap<std::string, float>	*getDF() const;
 		
 		void	execExchange(std::string argv);
 		class FileNotFound : public std::exception {
