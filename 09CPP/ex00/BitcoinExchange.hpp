@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:24:29 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/08 22:48:19 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/10 22:53:27 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,19 @@
 #include <fstream>
 #include <exception>
 #include <cstdlib>
+#include <cmath>
 #include <string>
 #include <iomanip>
+#include <map>
 #include <unordered_map>
 
 class BitcoinExchange {
 	private:
 		std::string						_database;
 		std::string						_datafile;
-		std::unordered_multimap<std::string, float>	_db;
-		std::unordered_multimap<std::string, float>	_df;
+		std::multimap<std::string, float>	_db;
 		
-		void _dataToMap(std::string data, char 	ch, std::unordered_multimap<std::string, float> *map);
+		void _dataToMap(std::string data, char 	ch, std::multimap<std::string, float> *map);
 	public:
 		BitcoinExchange();
 		BitcoinExchange(std::string data);
@@ -39,8 +40,7 @@ class BitcoinExchange {
 		void							putDatafile(std::string argv);		
 		std::string						getDatabase() const;
 		std::string						getDatafile() const;
-		std::unordered_multimap<std::string, float>	*getDB() const;
-		std::unordered_multimap<std::string, float>	*getDF() const;
+		std::multimap<std::string, float>	*getDB() const;
 		
 		void	execExchange(std::string argv);
 		class FileNotFound : public std::exception {
@@ -55,3 +55,4 @@ bool isValidFile(std::string file);
 bool isValidDate(std::string date);
 bool isValidValue(float *value, char ch);
 std::string trim(const std::string& s);
+float findClosestLowerDate(const std::multimap<std::string, float>& database, const std::string & inputDate);
