@@ -6,7 +6,7 @@
 #    By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/12/07 13:07:47 by pnopjira          #+#    #+#              #
-#    Updated: 2024/01/10 23:57:18 by pnopjira         ###   ########.fr        #
+#    Updated: 2024/01/11 10:58:23 by pnopjira         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,9 @@ CPPFLAGS	= -Wall -Wextra -Werror -std=c++98 -g
 all: $(NAME)
 
 $(NAME): $(OBJ) $(HED)
-	$(CC) $(CPPFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(CPPFLAGS) -c -o main.o main.cpp
+	$(CC) $(CPPFLAGS) -c -o PmergeMe.o PmergeMe.cpp
+	$(CC) $(CPPFLAGS) -o $(NAME) PmergeMe.o main.o
 
 clean:
 	$(RM) $(OBJ)
