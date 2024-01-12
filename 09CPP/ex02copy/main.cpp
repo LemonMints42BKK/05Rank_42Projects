@@ -6,7 +6,7 @@
 /*   By: pnopjira <65420071@kmitl.ac.th>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/04 11:27:32 by pnopjira          #+#    #+#             */
-/*   Updated: 2024/01/12 12:57:57 by pnopjira         ###   ########.fr       */
+/*   Updated: 2024/01/12 17:17:57 by pnopjira         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,15 @@ int main(int argc, char** argv) {
         std::cout << "After:\t";
         dq.print_data();
 
-        vec.benchmark();
-        dq.benchmark();
+        if (vec.isSorted())
+			vec.benchmark();
+		else
+			throw PmergeMe<std::vector<int> >::unSortedException();
+        
+		if (dq.isSorted())
+			dq.benchmark();
+		else
+			throw PmergeMe<std::deque<int> >::unSortedException();
     } catch (std::exception &e) {
         std::cout << e.what() << std::endl;
     }
